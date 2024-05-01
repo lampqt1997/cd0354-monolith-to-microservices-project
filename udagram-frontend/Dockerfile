@@ -1,5 +1,5 @@
 ### Build
-FROM beevelop/ionic:latest AS ionic
+FROM beevelop/ionic:update-ionic-6.16 AS ionic
 ## Create app directory
 WORKDIR /usr/src/app
 ## Install app dependencies
