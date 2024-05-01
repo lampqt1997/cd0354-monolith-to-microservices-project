@@ -12,7 +12,7 @@ before_install:
 
 install:
   # Build the Docker container and start the services
-  - docker-compose -f docker-compose-build.yaml up --build -d
+  - docker-compose -f docker-compose-build.yaml up -d
 
 script:
   # Check the container logs (optional)
