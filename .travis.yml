@@ -1,4 +1,4 @@
-language: minimal
+language: generic
 
 services:
   - docker
@@ -9,6 +9,9 @@ before_install:
   - sudo chmod +x /usr/local/bin/docker-compose
   # Log in to Docker Hub if necessary
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - node --version
+  - npm --version
+  - node --version
 
 install:
   # Build the Docker container and start the services
