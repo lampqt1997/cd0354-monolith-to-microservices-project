@@ -1,20 +1,15 @@
-# Use an official Node.js base image compatible with ARM64
-FROM node:16 AS ionic-builder
-
-# Install Ionic CLI
-RUN npm install -g @ionic/cli
-
-# Create app directory
+### Build
+FROM beevelop/ionic:latest AS ionic
+## Create app directory
 WORKDIR /usr/src/app
-
-# Install app dependencies
+## Install app dependencies
+## A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 RUN npm ci
-
-# Bundle app source
+## Bundle app source
 COPY . .
 RUN ionic build
-
-# Use an official Nginx image that supports ARM64
+### Run
 FROM nginx:alpine
-COPY --from=ionic-builder /usr/src/app/www /usr/share/nginx/html
+#COPY www /usr/share/nginx/html
+COPY --from=ionic  /usr/src/app/www /usr/share/nginx/html
