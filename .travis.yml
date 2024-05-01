@@ -23,6 +23,8 @@ script:
   # Your tests or other commands go here
   # Example: curl http://localhost: or other simple smoke test
   - docker-compose ps
+  - docker-compose exec frontend cat /usr/src/app/package-lock.json  # Replace <service-name> with your service name
+
 
 after_script:
   - docker-compose down
