@@ -1,0 +1,25 @@
+language: minimal
+
+services:
+  - docker
+
+before_install:
+  # Install Docker Compose
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
+  # Log in to Docker Hub if necessary
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+install:
+  # Build the Docker container and start the services
+  - docker-compose -f docker-compose-build.yaml up --build -d
+
+script:
+  # Check the container logs (optional)
+  - docker-compose logs
+  # Your tests or other commands go here
+  # Example: curl http://localhost: or other simple smoke test
+  - docker-compose ps
+
+after_script:
+  - docker-compose down
