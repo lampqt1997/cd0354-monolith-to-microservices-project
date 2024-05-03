@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-
+  name: backend-feed
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend-
+      app: backend-feed
   template:
     metadata:
       labels:
-        app: backend-
+        app: backend-feed
     spec:
       containers:
-        - name: backend-
+        - name: backend-feed
           image: lampqt/udagram-api-feed:latest
           ports:
             - containerPort: 8080
