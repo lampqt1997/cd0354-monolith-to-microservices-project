@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: udagram-env-config
+data:
+  POSTGRES_HOST: "lampqt.cavkyhf6u8wd.us-east-1.rds.amazonaws.com"
+  POSTGRES_DB: "postgres"
+  AWS_REGION: "us-east-1"
+  AWS_BUCKET: "lampqt-bucket"
+  JWT_SECRET: "testing"
+  AWS_PROFILE: "default"
+  URL: "http://localhost:8100"

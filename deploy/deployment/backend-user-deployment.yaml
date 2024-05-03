@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-api-user
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: udagram-api-user
+  template:
+    metadata:
+      labels:
+        app: udagram-api-user
+    spec:
+      containers:
+        - name: udagram-api-user
+          image: lampqt/udagram-api-user:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-db-credentials
+                  key: POSTGRES_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-db-credentials
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key: POSTGRES_DB
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key: JWT_SECRET
+            - name:   AWS_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key:   AWS_BUCKET
+            - name:   AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key:   AWS_REGION
+            - name:   AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-env-config
+                  key:   AWS_PROFILE
+          volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws"
+              readOnly: true
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+            items:
+              - key: credentials
+                path: credentials
