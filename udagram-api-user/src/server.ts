@@ -34,7 +34,7 @@ import {V0_USER_MODELS} from './controllers/v0/model.index';
   //   origin: '*',
   // }));
   const corsOptions = {
-    origin: 'http://a653245a80fbf449ab15136f91ad079b-78106986.us-east-1.elb.amazonaws.com',
+    origin: 'http://a1ed18f4f8d864c72a24c8d948370c1f-1007128833.us-east-2.elb.amazonaws.com',
     allowedHeaders: [
       'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token', 'Authorization', 'Referer', 'User-Agent', 'Access-Control-Allow-Origin'
     ],
