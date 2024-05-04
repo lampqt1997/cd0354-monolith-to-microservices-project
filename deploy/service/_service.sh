@@ -10,3 +10,8 @@ kubectl apply -f frontend-service.yaml
 
 kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend
 kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy
+
+
+kubectl autoscale deployment backend-user --cpu-percent=50 --min=3 --max=5
+kubectl autoscale deployment backend-feed --cpu-percent=50 --min=3 --max=5
+kubectl autoscale deployment frontend --cpu-percent=50 --min=3 --max=5
